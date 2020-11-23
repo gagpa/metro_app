@@ -1,6 +1,10 @@
-from flask import Flask
-from configs.app_config import app_configs
 import os
+
+from flask import Flask
+
+from app.db import db
+from app.serializer import ma
+from configs.app_config import app_configs
 
 
 def create_app(config_name):
@@ -11,6 +15,8 @@ def create_app(config_name):
 
     config = app_configs[config_name]
     app.config.from_object(config)
+    db.init_app(app)
+    ma.init_app(app)
 
     from .api import api
     app.register_blueprint(blueprint=api, url_prefix='/api/v1')
