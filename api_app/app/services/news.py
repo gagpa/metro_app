@@ -1,6 +1,6 @@
 from app.exceptions import NewsNotFounded
 from app.models import News
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def get_metro_news(delta_day: int) -> list:
@@ -33,8 +33,8 @@ def get_metro_news_from_db(delta_day: int) -> list:
            }, ...
         ]
     """
-    delay_date = datetime.now()
-    news = News.objects(publish_date__lte=delay_date)
+    delta_date = datetime.now() - timedelta(days=delta_day)
+    news = News.objects(publish_date__gte=delta_date)
     if news:
         return news
     raise NewsNotFounded

@@ -12,10 +12,9 @@ def get_metro_news():
     """
     Выдать новости
     """
-
     GetMetroNewsDayValidator().validate_args(request.args)
     day = request.args.get('day', default_delay_days)
-    news = service_get_metro_news(day)
+    news = service_get_metro_news(int(day))
     schema = NewsSchema()
     news = [schema.dump(new) for new in news]
     return make_response(jsonify(news))
