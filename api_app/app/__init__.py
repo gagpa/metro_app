@@ -1,10 +1,10 @@
-import os
 
 from flask import Flask
 
 from app.db import db
 from app.serializer import ma
 from configs.app_config import app_configs
+from configs.settings import APP_MODE
 
 
 def create_app(config_name):
@@ -24,4 +24,4 @@ def create_app(config_name):
     return app
 
 
-app = create_app(os.getenv('APP_MODE'))
+app = create_app(APP_MODE)
