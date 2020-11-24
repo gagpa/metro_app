@@ -1,5 +1,4 @@
 from app.serializer import ma
-from marshmallow import post_dump
 
 
 class News(ma.Schema):

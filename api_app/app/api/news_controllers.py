@@ -1,7 +1,7 @@
 from flask import jsonify, request, make_response
 
 from app.schemas import ResponseNews
-from app.services.news import get_metro_news as service_get_metro_news
+from app.services.news import get as news_service
 from app.validators import NewsRequestValidator
 from . import api
 
@@ -14,8 +14,7 @@ def get():
     """
     NewsRequestValidator().validate_args(request.args)
     day = request.args.get('day')
-    news = service_get_metro_news(day)
+    news = news_service(day)
     schema = ResponseNews()
-
     content = schema.dump({'data': news})
     return make_response(jsonify(content))
