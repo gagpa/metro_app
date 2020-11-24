@@ -12,7 +12,10 @@ class ParserNewsList:
     def __init__(self):
         self.page_number = 0
 
-    def parse(self):
+    def parse(self) -> list:
+        """
+        Запарсить новости на текущей странице (page_number).
+        """
         list_page = self.parse_next_list_page()
         news_blocks = self.parser_news.parse_news_blocks(list_page)
         news = []
@@ -33,13 +36,16 @@ class ParserNewsList:
         return news
 
     def parse_direct_page(self, uri):
+        """
+        Получить объект конкретной новости для парсинга.
+        """
         direct_news_url = urljoin(self.url_news, uri)
         direct_page = get_soup(direct_news_url)
         return direct_page
 
     def parse_next_list_page(self):
         """
-        Запарсить следующую страницу с новостями
+        Получить объект списка новостей для парсинга следующей страницы.
         """
         self.page_number += 1
         html = get_soup(self.link.format(page_number=self.page_number))
