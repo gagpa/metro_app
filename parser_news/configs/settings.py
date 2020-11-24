@@ -27,3 +27,8 @@ BROKER_HOST = os.getenv('BROKER_HOST')
 
 # Порт брокера
 BROKER_PORT = os.getenv('BROKER_PORT')
+
+# Полный URl для соединения с брокером
+BROKER = f'{BROKER_PROTOCOL}://{BROKER_USER}:{BROKER_PASSWORD}@{BROKER_HOST}:{BROKER_PORT}//'
+
+SCHEDULE_TIMEOUT = int(os.getenv('SCHEDULE_TIMEOUT')) or 600

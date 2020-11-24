@@ -19,7 +19,7 @@ class ParserNews:
 
     def parse_news_uri(self, block: BeautifulSoup) -> str:
         """
-        Запарсить заголовок URI новости.
+        Запарсить URI новости.
         """
         news_uri_map = map['news_uri']
         news_uri = block.find(news_uri_map['tag'], attrs=news_uri_map['attrs'])['href']
@@ -36,7 +36,7 @@ class ParserNews:
 
     def parse_content(self, block: BeautifulSoup) -> str:
         """
-        Запарсить заголовок контент.
+        Запарсить контент.
         """
         all_content_map = map['all_content']
         all_content = block.find(all_content_map['tag'], attrs=all_content_map['attrs'])
@@ -47,7 +47,7 @@ class ParserNews:
 
     def parse_image_uri(self, block: BeautifulSoup) -> str or None:
         """
-        Запарсить заголовок URI картинки.
+        Запарсить URI картинки.
         """
         image_uri_map = map['image_uri']
         image_uri = block.find(image_uri_map['tag'], attrs=image_uri_map['attrs'])['src']
@@ -56,7 +56,7 @@ class ParserNews:
 
     def parse_news_blocks(self, block: BeautifulSoup) -> list:
         """
-        Запарсить заголовок на странице новостные блоки.
+        Запарсить на странице новостные блоки.
         """
         new_blocks_map = map['new_blocks']
         news_blocks = block.find_all(new_blocks_map['tag'], attrs=new_blocks_map['attrs'])
