@@ -20,23 +20,26 @@ class ParserNewsList:
         news_blocks = self.parser_news.parse_news_blocks(list_page)
         news = []
         for block in news_blocks:
-            news_uri = self.parser_news.parse_news_uri(block)
-            title = self.parser_news.parse_title(block)
-            image_uri = self.parser_news.parse_image_uri(block)
-            direct_page = self.parse_direct_page(news_uri)
-            published_date = self.parser_news.parse_published_date(direct_page)
+            try:
+                news_uri = self.parser_news.parse_news_uri(block)
+                title = self.parser_news.parse_title(block)
+                image_uri = self.parser_news.parse_image_uri(block)
+                direct_page = self.parse_direct_page(news_uri)
+                published_date = self.parser_news.parse_published_date(direct_page)
 
-            if last_date and published_date <= last_date:
-                return news
+                if last_date and published_date <= last_date:
+                    return news
 
-            content = self.parser_news.parse_content(direct_page)
+                content = self.parser_news.parse_content(direct_page)
 
-            news.append(
-                {'title': title,
-                 'published_date': published_date,
-                 'content': content,
-                 'image_url': urljoin(self.url_news, image_uri),
-                 })
+                news.append(
+                    {'title': title,
+                     'published_date': published_date,
+                     'content': content,
+                     'image_url': urljoin(self.url_news, image_uri),
+                     })
+            except (AttributeError, TypeError):
+                continue
         return news
 
     def parse_direct_page(self, uri):

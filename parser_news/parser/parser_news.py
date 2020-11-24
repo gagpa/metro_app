@@ -33,6 +33,7 @@ class ParserNews:
         published_date = block.find(published_date_map['tag'], attrs=published_date_map['attrs']).text
         return transform(translate(published_date))
 
+
     def parse_content(self, block: BeautifulSoup) -> str:
         """
         Запарсить заголовок контент.
@@ -48,12 +49,10 @@ class ParserNews:
         """
         Запарсить заголовок URI картинки.
         """
-        try:
-            image_uri_map = map['image_uri']
-            image_uri = block.find(image_uri_map['tag'], attrs=image_uri_map['attrs'])['src']
-            return image_uri
-        except TypeError:
-            return None
+        image_uri_map = map['image_uri']
+        image_uri = block.find(image_uri_map['tag'], attrs=image_uri_map['attrs'])['src']
+        return image_uri
+
 
     def parse_news_blocks(self, block: BeautifulSoup) -> list:
         """

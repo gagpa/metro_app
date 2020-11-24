@@ -21,7 +21,7 @@ metro_news_html_map = {
                        },
 
     'new_blocks': {'tag': 'div',
-                   'attrs': {'class': re.compile('(newslist__list-item)( _warning)*')}
+                   'attrs': {'class': re.compile('(newslist__list-item)')}
                    },
 
     'all_content': {'tag': 'div',
