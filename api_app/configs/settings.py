@@ -1,1 +1,13 @@
-default_delay_days = 30
+"""
+Файл для размещения общих настоек для работы сервисов и приложения.
+"""
+import os
+
+# Стандартное количество дней за которое необходимо выдать информацию.
+DEFAULT_DELTA_DAYS = int(os.getenv('DEFAULT_DELTA_DAYS'))
+
+# Максимальное количество дней за которое сервис может выдать информацию.
+MAX_DELTA_DAYS = int(os.getenv('MAX_DELTA_DAYS'))
+
+# Режим в котором приложение работает
+APP_MODE = os.getenv('APP_MODE')
