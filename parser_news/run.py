@@ -10,8 +10,15 @@ from db.models import News
 from parser.parser_news_list import ParserNewsList
 
 if __name__ == '__main__':
+
+    last_date = News.objects.order_by('id').first().published_date
     parser = ParserNewsList()
 
-    news = parser.parse()
-    for n in news:
-        News(**n).save()
+    while True:
+
+        news = parser.parse(last_date)
+        for n in news:
+            News(**n).save()
+
+        if len(news) < 24:
+            break

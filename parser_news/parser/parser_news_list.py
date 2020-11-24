@@ -12,7 +12,7 @@ class ParserNewsList:
     def __init__(self):
         self.page_number = 0
 
-    def parse(self) -> list:
+    def parse(self, last_date=None) -> list:
         """
         Запарсить новости на текущей странице (page_number).
         """
@@ -25,6 +25,10 @@ class ParserNewsList:
             image_uri = self.parser_news.parse_image_uri(block)
             direct_page = self.parse_direct_page(news_uri)
             published_date = self.parser_news.parse_published_date(direct_page)
+
+            if last_date and published_date <= last_date:
+                return news
+
             content = self.parser_news.parse_content(direct_page)
 
             news.append(
